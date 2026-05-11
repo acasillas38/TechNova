@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechNova — Equips i Webs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap"
+        rel="stylesheet">
+    <style>
+        /* RESET */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        img,
+        svg {
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* TOKENS */
+        :root {
+            --paper: #F0EDE6;
+            --paper2: #E6E2DA;
+            --ink: #111111;
+            --mid: #72706A;
+            --rule: #D2CCC4;
+            --orange: #C64600;
+            --white: #F8F6F2;
+            --mono: 'IBM Plex Mono', monospace;
+            --sans: 'Bricolage Grotesque', sans-serif;
+        }
+
+        body {
+            background: var(--paper);
+            color: var(--ink);
+            font-family: var(--sans);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+
+        }
+
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            background: var(--paper);
+            border-bottom: 1px solid var(--rule);
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            padding: 0 3rem;
+            height: 56px;
+        }
+
+        .nav-logo {
+            font-family: var(--sans);
+            font-weight: 800;
+            font-size: .95rem;
+            letter-spacing: -.02em;
+        }
+
+        .nav-logo em {
+            color: var(--orange);
+            font-style: normal;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--mono);
+            font-size: .62rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--mid);
+            transition: color .18s;
+        }
+
+        .nav-links a:hover {
+            color: var(--ink);
+        }
+
+        .nav-cta {
+            font-family: var(--mono);
+            font-size: .62rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            background: var(--ink);
+            color: var(--paper);
+            padding: .5rem 1.1rem;
+            transition: background .2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--orange);
+        }
+
+        /* TICKER */
+        .ticker-wrap {
+            position: fixed;
+            top: 56px;
+            left: 0;
+            right: 0;
+            z-index: 499;
+            background: var(--orange);
+            height: 30px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .ticker-track {
+            display: flex;
+            white-space: nowrap;
+            animation: tick 30s linear infinite;
+        }
+
+        .ticker-track span {
+            font-family: var(--mono);
+            font-size: .6rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--white);
+            padding: 0 2.5rem;
+        }
+
+        .ticker-track .dot {
+            padding: 0;
+            color: rgba(248, 246, 242, .35);
+        }
+
+        @keyframes tick {
+            from {
+                transform: translateX(0)
+            }
+
+            to {
+                transform: translateX(-50%)
+            }
+        }
+
+        /* PAGE OFFSET */
+        .offset {
+            height: 86px;
+        }
+
+        /* SECTION LABEL */
+        .s-label {
+            font-family: var(--mono);
+            font-size: .6rem;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--mid);
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            margin-bottom: 1rem;
+        }
+
+        .s-label::before {
+            content: '';
+            width: 14px;
+            height: 1px;
+            background: var(--orange);
+            flex-shrink: 0;
+        }
+
+        /* HERO */
+        #hero {
+            display: grid;
+            grid-template-columns: 1fr 260px;
+            grid-template-rows: 1fr auto;
+            min-height: calc(100svh - 86px);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .hero-main {
+            padding: 5rem 3rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            border-right: 1px solid var(--rule);
+        }
+
+        .hero-label {
+            font-family: var(--mono);
+            font-size: .6rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 14px;
+            height: 1px;
+            background: var(--orange);
+        }
+
+        h1 {
+            font-family: var(--sans);
+            font-weight: 800;
+            font-size: clamp(3.8rem, 8.5vw, 6rem);
+            line-height: .92;
+            letter-spacing: -.04em;
+        }
+
+        h1 .al {
+            display: block;
+            overflow: hidden;
+        }
+
+        h1 .al span {
+            display: block;
+            transform: translateY(110%);
+            animation: lineUp .65s cubic-bezier(.16, 1, .3, 1) forwards;
+        }
+
+        h1 .al:nth-child(1) span {
+            animation-delay: .05s;
+        }
+
+        h1 .al:nth-child(2) span {
+            animation-delay: .14s;
+        }
+
+        h1 .al:nth-child(3) span {
+            animation-delay: .23s;
+            color: var(--orange);
+        }
+
+        @keyframes lineUp {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .hero-sub {
+            margin-top: 2.5rem;
+            font-size: .95rem;
+            color: var(--mid);
+            line-height: 1.7;
+            max-width: 420px;
+        }
+
+        .hero-cta-row {
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: .65rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            padding: .72rem 1.5rem;
+            border: 1px solid var(--ink);
+            color: var(--ink);
+            background: transparent;
+
+            transition: background .2s, color .2s;
+        }
+
+        .btn:hover {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        .btn-fill {
+            background: var(--orange);
+            border-color: var(--orange);
+            color: var(--white);
+        }
+
+        .btn-fill:hover {
+            background: var(--ink);
+            border-color: var(--ink);
+        }
+
+        .hero-aside {
+            padding: 2.5rem 1.8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hero-meta {
+            font-family: var(--mono);
+            font-size: .58rem;
+            color: var(--mid);
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            line-height: 2.1;
+        }
+
+        .hero-bignum {
+            font-family: var(--sans);
+            font-weight: 800;
+            font-size: 5.5rem;
+            color: var(--paper2);
+            letter-spacing: -.06em;
+            line-height: 1;
+        }
+
+        .hero-bignum span {
+            display: block;
+            font-family: var(--mono);
+            font-size: .55rem;
+            font-weight: 400;
+            color: var(--mid);
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            margin-top: .5rem;
+        }
+
+        .hero-bottom {
+            grid-column: 1 / -1;
+            border-top: 1px solid var(--rule);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .hstat {
+            padding: 1.2rem 1.5rem;
+            border-right: 1px solid var(--rule);
+        }
+
+        .hstat:last-child {
+            border-right: none;
+        }
+
+        .hstat-n {
+            font-family: var(--sans);
+            font-weight: 800;
+            font-size: 1.7rem;
+            letter-spacing: -.03em;
+            color: var(--ink);
+        }
+
+        .hstat-l {
+            font-family: var(--mono);
+            font-size: .56rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-top: .2rem;
+        }
+
+        /* SERVICES */
+        #serveis {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .srv {
+            padding: 3.5rem 3rem;
+            border-right: 1px solid var(--rule);
+            border-bottom: 1px solid var(--rule);
+            position: relative;
+            overflow: hidden;
+
+            transition: background .28s;
+        }
+
+        .srv:nth-child(2n) {
+            border-right: none;
+        }
+
+        .srv:nth-child(3),
+        .srv:nth-child(4) {
+            border-bottom: none;
+        }
+
+        .srv-bg {
+            position: absolute;
+            inset: 0;
+            background: var(--ink);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform .38s cubic-bezier(.16, 1, .3, 1);
+        }
+
+        .srv:hover .srv-bg {
+            transform: scaleY(1);
+        }
+
+        .srv>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .srv:hover .srv-n {
+            color: var(--orange);
+        }
+
+        .srv:hover .srv-arr {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        .srv-n {
+            font-family: var(--mono);
+            font-size: .6rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 2.5rem;
+            transition: color .28s;
+        }
+
+        .srv-t {
+            font-family: var(--sans);
+            font-weight: 800;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            letter-spacing: -.03em;
+            line-height: 1.05;
+            color: var(--ink);
+            margin-bottom: 1.2rem;
+            transition: color .28s;
+        }
+
+        .srv-d {
+            font-size: .88rem;
+            color: var(--mid);
+            line-height: 1.72;
+            max-width: 360px;
+            transition: color .28s;
+        }
+
+        .srv-tags {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: .4rem;
+        }
+
+        .srv-tag {
+            font-family: var(--mono);
+            font-size: .55rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            border: 1px solid var(--rule);
+            padding: .28rem .55rem;
+            color: var(--mid);
+            transition: border-color .28s, color .28s;
+        }
+
+        .srv-arr {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 1.3rem;
+            color: var(--orange);
+            opacity: 0;
+            transform: translate(-8px, 8px);
+            transition: opacity .3s, transform .3s;
+        }
+
+        /* ABOUT */
+        #nosaltres {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .about-l {
+            background: var(--ink);
+            padding: 5rem 3.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .about-l h2 {
+            font-family: var(--sans);
+            font-weight: 800;
+            font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+            letter-spacing: -.04em;
+            line-height: 1.02;
+            color: var(--white);
+        }
+
+        .about-l h2 em {
+            color: var(--orange);
+            font-style: normal;
+            display: block;
+        }
+
+        .about-mission {
+            font-size: .88rem;
+            color: rgba(248, 246, 242, .55);
+            line-height: 1.72;
+            border-left: 2px solid var(--orange);
+            padding-left: 1rem;
+            margin-top: 3rem;
+        }
+
+        .about-mission-label {
+            font-family: var(--mono);
+            font-size: .55rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: rgba(248, 246, 242, .3);
+            margin-bottom: .5rem;
+        }
+
+        .about-r {
+            padding: 5rem 3.5rem;
+            border-left: 1px solid var(--rule);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .about-r p {
+            font-size: .9rem;
+            color: var(--mid);
+            line-height: 1.75;
+            margin-bottom: 1.2rem;
+        }
+
+        .about-r p strong {
+            color: var(--ink);
+            font-weight: 700;
+        }
+
+        .vals {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .vals li {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            padding: .9rem 0;
+            border-top: 1px solid var(--rule);
+            font-size: .88rem;
+            font-weight: 700;
+            color: var(--ink);
+        }
+
+        .vals li:last-child {
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .v-n {
+            font-family: var(--mono);
+            font-size: .56rem;
+            color: var(--orange);
+            letter-spacing: .1em;
+            flex-shrink: 0;
+        }
+
+        .v-s {
+            font-weight: 400;
+            color: var(--mid);
+            font-size: .78rem;
+            margin-left: auto;
+            text-align: right;
+            font-family: var(--mono);
+            letter-spacing: .05em;
+        }
+
+        /* PROCESS */
+        #proces {
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .proc-head {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: end;
+            padding: 4rem 3rem 3rem;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .proc-head h2 {
+            font-family: var(--sans);
+            font-weight: 800;
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            letter-spacing: -.04em;
+            line-height: 1.05;
+        }
+
+        .proc-head p {
+            font-size: .88rem;
+            color: var(--mid);
+            line-height: 1.7;
+            max-width: 320px;
+            justify-self: end;
+        }
+
+        .proc-steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+        .p-s {
+            padding: 2.5rem 2rem;
+            border-right: 1px solid var(--rule);
+            transition: background .22s;
+        }
+
+        .p-s:last-child {
+            border-right: none;
+        }
+
+        .p-s:hover {
+            background: var(--paper2);
+        }
+
+        .p-s-n {
+            font-family: var(--mono);
+            font-size: .58rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 2rem;
+        }
+
+        .p-s h3 {
+            font-family: var(--sans);
+            font-weight: 700;
+            font-size: .95rem;
+            letter-spacing: -.02em;
+            margin-bottom: .6rem;
+        }
+
+        .p-s p {
+            font-size: .8rem;
+            color: var(--mid);
+            line-height: 1.65;
+        }
+
+        /* EQUIPS */
+        #equips {
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .equips-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 4rem 3rem 3rem;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .equips-head h2 {
+            font-family: var(--sans);
+            font-weight: 800;
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            letter-spacing: -.04em;
+            line-height: 1.05;
+        }
+
+        .equips-head p {
+            font-size: .88rem;
+            color: var(--mid);
+            max-width: 280px;
+            line-height: 1.65;
+            text-align: right;
+        }
+
+        .equips-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .eq {
+            padding: 2.5rem 2rem;
+            border-right: 1px solid var(--rule);
+            border-bottom: 1px solid var(--rule);
+            transition: background .22s;
+
+        }
+
+        .eq:nth-child(3n) {
+            border-right: none;
+        }
+
+        .eq:nth-child(4),
+        .eq:nth-child(5),
+        .eq:nth-child(6) {
+            border-bottom: none;
+        }
+
+        .eq:hover {
+            background: var(--paper2);
+        }
+
+        .eq:hover .eq-name {
+            color: var(--orange);
+        }
+
+        .eq-cat {
+            font-family: var(--mono);
+            font-size: .56rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--mid);
+            margin-bottom: .5rem;
+        }
+
+        .eq-name {
+            font-family: var(--sans);
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: -.02em;
+            color: var(--ink);
+            margin-bottom: .6rem;
+            transition: color .2s;
+        }
+
+        .eq-desc {
+            font-size: .8rem;
+            color: var(--mid);
+            line-height: 1.62;
+        }
+
+        /* CONTACT */
+        #contacte {
+            background: var(--orange);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
+        }
+
+        .ct-l {
+            padding: 5rem 3.5rem;
+            border-right: 1px solid rgba(0, 0, 0, .12);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .ct-l h2 {
+            font-family: var(--sans);
+            font-weight: 800;
+            font-size: clamp(2.5rem, 5vw, 4.8rem);
+            letter-spacing: -.04em;
+            line-height: .95;
+            color: var(--white);
+        }
+
+        .ct-l h2 em {
+            font-style: normal;
+            color: rgba(248, 246, 242, .38);
+            display: block;
+        }
+
+        .ct-info {
+            margin-top: auto;
+            padding-top: 3rem;
+        }
+
+        .ct-block {
+            margin-top: 1.5rem;
+        }
+
+        .ct-lbl {
+            font-family: var(--mono);
+            font-size: .55rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: rgba(248, 246, 242, .5);
+            margin-bottom: .3rem;
+        }
+
+        .ct-val {
+            font-size: .9rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .ct-r {
+            padding: 5rem 3.5rem;
+        }
+
+        .f-lbl {
+            display: block;
+            font-family: var(--mono);
+            font-size: .55rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: rgba(248, 246, 242, .65);
+            margin-bottom: .5rem;
+        }
+
+        .f-in {
+            display: block;
+            width: 100%;
+            background: rgba(0, 0, 0, .12);
+            border: 1px solid rgba(248, 246, 242, .25);
+            padding: .8rem .95rem;
+            font-family: var(--sans);
+            font-size: .9rem;
+            color: var(--white);
+            outline: none;
+            margin-bottom: 1.3rem;
+            transition: border-color .2s, background .2s;
+            appearance: none;
+        }
+
+        .f-in::placeholder {
+            color: rgba(248, 246, 242, .35);
+        }
+
+        .f-in:focus {
+            border-color: rgba(248, 246, 242, .7);
+            background: rgba(0, 0, 0, .2);
+        }
+
+        textarea.f-in {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .f-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .f-sub {
+            width: 100%;
+            background: var(--ink);
+            border: none;
+            color: var(--white);
+            font-family: var(--mono);
+            font-size: .62rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            padding: .9rem;
+
+            margin-top: .4rem;
+            transition: background .2s;
+        }
+
+        .f-sub:hover {
+            background: var(--white);
+            color: var(--ink);
+        }
+
+        /* FOOTER */
+        footer {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background: var(--ink);
+        }
+
+        .f-logo {
+            font-family: var(--sans);
+            font-weight: 800;
+            font-size: .9rem;
+            letter-spacing: -.02em;
+            color: var(--white);
+        }
+
+        .f-logo em {
+            color: var(--orange);
+            font-style: normal;
+        }
+
+        .f-copy {
+            font-family: var(--mono);
+            font-size: .55rem;
+            letter-spacing: .1em;
+            color: rgba(248, 246, 242, .3);
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .f-links {
+            text-align: right;
+        }
+
+        .f-links a {
+            font-family: var(--mono);
+            font-size: .55rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(248, 246, 242, .35);
+            margin-left: 2rem;
+            transition: color .2s;
+        }
+
+        .f-links a:hover {
+            color: var(--orange);
+        }
+
+        /* REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .55s cubic-bezier(.16, 1, .3, 1), transform .55s cubic-bezier(.16, 1, .3, 1);
+        }
+
+        .reveal.in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* MOBILE */
+        @media (max-width: 900px) {
+            nav {
+                padding: 0 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            #hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-aside {
+                display: none;
+            }
+
+            .hero-bottom {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-main {
+                padding: 3rem 1.5rem 2rem;
+            }
+
+            #serveis {
+                grid-template-columns: 1fr;
+            }
+
+            .srv:nth-child(n) {
+                border-right: none;
+                border-bottom: 1px solid var(--rule);
+            }
+
+            .srv:last-child {
+                border-bottom: none;
+            }
+
+            #nosaltres {
+                grid-template-columns: 1fr;
+            }
+
+            .about-r {
+                border-left: none;
+                border-top: 1px solid var(--rule);
+                padding: 3rem 1.5rem;
+            }
+
+            .about-l {
+                padding: 3rem 1.5rem;
+            }
+
+            .proc-head {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .proc-steps {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .p-s:nth-child(2n) {
+                border-right: none;
+            }
+
+            .equips-head {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                padding: 3rem 1.5rem 2rem;
+            }
+
+            .equips-head p {
+                text-align: left;
+            }
+
+            .equips-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .eq:nth-child(2n) {
+                border-right: none;
+            }
+
+            .eq:nth-child(3n) {
+                border-right: 1px solid var(--rule);
+            }
+
+            .eq:nth-child(5) {
+                border-bottom: none;
+            }
+
+            #contacte {
+                grid-template-columns: 1fr;
+            }
+
+            .ct-l {
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 0, 0, .12);
+                padding: 3rem 1.5rem;
+            }
+
+            .ct-r {
+                padding: 3rem 1.5rem;
+            }
+
+            .f-row {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: .5rem;
+            }
+
+            .f-links {
+                text-align: center;
+            }
+
+            .f-links a {
+                margin: 0 .8rem;
+            }
+
+            .proc-head,
+            .equips-head,
+            .srv,
+            .about-l,
+            .about-r,
+            .p-s,
+            .ct-l,
+            .ct-r {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cur" id="cur"></div>
+    <div class="cur-o" id="curO"></div>
+
+    <!-- NAV -->
+    <nav id="nav">
+        <a href="#" class="nav-logo">Tech<em>Nova</em></a>
+        <ul class="nav-links">
+            <li><a href="#serveis">Serveis</a></li>
+            <li><a href="#nosaltres">Nosaltres</a></li>
+            <li><a href="#equips">Equips</a></li>
+            <li><a href="#contacte">Contacte</a></li>
+        </ul>
+        <a href="#contacte" class="nav-cta">Contactar →</a>
+    </nav>
+
+    <!-- TICKER -->
+    <div class="ticker-wrap">
+        <div class="ticker-track">
+            <span>Manteniment d'equips</span><span class="dot">·</span>
+            <span>Compra i venda</span><span class="dot">·</span>
+            <span>Creació de webs</span><span class="dot">·</span>
+            <span>Manteniment de webs</span><span class="dot">·</span>
+            <span>Suport tècnic</span><span class="dot">·</span>
+            <span>Assessorament IT</span><span class="dot">·</span>
+            <span>Xarxes i infraestructura</span><span class="dot">·</span>
+            <span>Manteniment d'equips</span><span class="dot">·</span>
+            <span>Compra i venda</span><span class="dot">·</span>
+            <span>Creació de webs</span><span class="dot">·</span>
+            <span>Manteniment de webs</span><span class="dot">·</span>
+            <span>Suport tècnic</span><span class="dot">·</span>
+            <span>Assessorament IT</span><span class="dot">·</span>
+            <span>Xarxes i infraestructura</span><span class="dot">·</span>
+        </div>
+    </div>
+
+    <div class="offset"></div>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-main">
+            <div class="hero-label">Servei tècnic integral · Barcelona</div>
+            <h1>
+                <span class="al"><span>Mantenim.</span></span>
+                <span class="al"><span>Venem.</span></span>
+                <span class="al"><span>Construïm.</span></span>
+            </h1>
+            <p class="hero-sub reveal">Equips informàtics, webs i infraestructura per a pimes i professionals. Un únic
+                proveïdor tècnic per a totes les teves necessitats digitals.</p>
+            <div class="hero-cta-row reveal">
+                <a href="#contacte" class="btn btn-fill">Demanar pressupost →</a>
+                <a href="#serveis" class="btn">Veure serveis</a>
+            </div>
+        </div>
+
+        <div class="hero-aside">
+            <div class="hero-meta">
+                Fundada el 2024<br>
+                Barcelona, CAT<br><br>
+                Atenció:<br>
+                Dl–Dv · 09–18h<br><br>
+                Urgències: 24/7
+            </div>
+            <div>
+                <div class="hero-bignum">04<span>Serveis principals</span></div>
+            </div>
+        </div>
+
+        <div class="hero-bottom">
+            <div class="hstat">
+                <div class="hstat-n" data-count="48" data-suffix="h">—</div>
+                <div class="hstat-l">Resposta màxima</div>
+            </div>
+            <div class="hstat">
+                <div class="hstat-n" data-count="100" data-suffix="%">—</div>
+                <div class="hstat-l">Satisfacció garantida</div>
+            </div>
+            <div class="hstat">
+                <div class="hstat-n" data-count="50" data-suffix="+">—</div>
+                <div class="hstat-l">Clients actius</div>
+            </div>
+            <div class="hstat">
+                <div class="hstat-n" data-count="1" data-suffix="">—</div>
+                <div class="hstat-l">Proveïdor, tot inclòs</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="serveis">
+
+        <div class="srv reveal">
+            <div class="srv-bg"></div>
+            <div class="srv-n">01 — Hardware</div>
+            <div class="srv-t">Manteniment<br>d'equips</div>
+            <p class="srv-d">Diagnosi, reparació i manteniment preventiu d'ordinadors, portàtils, servidors i
+                perifèrics. Evita aturades no previstes amb un pla periòdic adaptat a la teva empresa.</p>
+            <div class="srv-tags">
+                <span class="srv-tag">Diagnosi</span>
+                <span class="srv-tag">Reparació</span>
+                <span class="srv-tag">Preventiu</span>
+                <span class="srv-tag">In situ</span>
+            </div>
+            <div class="srv-arr">↗</div>
+        </div>
+
+        <div class="srv reveal">
+            <div class="srv-bg"></div>
+            <div class="srv-n">02 — Adquisició</div>
+            <div class="srv-t">Compra i venda<br>d'equips</div>
+            <p class="srv-d">Assessorament i gestió completa de la renovació del teu parc informàtic. Obtenim les
+                millors condicions del mercat i ho lliurem configurat i a punt per treballar.</p>
+            <div class="srv-tags">
+                <span class="srv-tag">Assessorament</span>
+                <span class="srv-tag">Renovació</span>
+                <span class="srv-tag">Configuració</span>
+                <span class="srv-tag">Garantia</span>
+            </div>
+            <div class="srv-arr">↗</div>
+        </div>
+
+        <div class="srv reveal">
+            <div class="srv-bg"></div>
+            <div class="srv-n">03 — Web</div>
+            <div class="srv-t">Creació<br>de webs</div>
+            <p class="srv-d">Dissenyem i desenvolupem webs corporatives, botigues online i portfolis professionals.
+                Ràpids, accessibles i optimitzats per a cercadors. Terminis reals, sense excuses.</p>
+            <div class="srv-tags">
+                <span class="srv-tag">Corporatiu</span>
+                <span class="srv-tag">E-commerce</span>
+                <span class="srv-tag">SEO</span>
+                <span class="srv-tag">Responsiu</span>
+            </div>
+            <div class="srv-arr">↗</div>
+        </div>
+
+        <div class="srv reveal">
+            <div class="srv-bg"></div>
+            <div class="srv-n">04 — Web ongoing</div>
+            <div class="srv-t">Manteniment<br>de webs</div>
+            <p class="srv-d">Actualitzacions de seguretat, còpies de seguretat automatitzades, monitoratge d'uptime i
+                suport continu. La teva web sempre activa i al dia, sense que t'hagis de preocupar de res.</p>
+            <div class="srv-tags">
+                <span class="srv-tag">Seguretat</span>
+                <span class="srv-tag">Backups</span>
+                <span class="srv-tag">Monitoring</span>
+                <span class="srv-tag">Actualitzacions</span>
+            </div>
+            <div class="srv-arr">↗</div>
+        </div>
+
+    </section>
+
+    <!-- ABOUT -->
+    <section id="nosaltres">
+        <div class="about-l reveal">
+            <div>
+                <div class="s-label" style="color:rgba(248,246,242,.35);">Qui som</div>
+                <h2>El teu equip<br>tècnic de<br><em>confiança.</em></h2>
+            </div>
+            <div>
+                <div class="about-mission-label">Missió</div>
+                <p class="about-mission">Mantenim la tecnologia de les empreses funcionant i la seva presència digital
+                    activa, amb un servei proper, honest i sense tecnicismes innecessaris.</p>
+            </div>
+        </div>
+
+        <div class="about-r reveal">
+            <div>
+                <div class="s-label">La nostra manera de treballar</div>
+                <p>A TechNova som un equip tècnic especialitzat en donar servei a pimes i professionals. No fem
+                    promeses buides: <strong>venim, diagnostiquem i ho deixem funcionant</strong>. Si quelcom falla,
+                    tens resposta en menys de 48 hores.</p>
+                <p>Actuem com el vostre departament IT extern. Coneixem la vostra infraestructura, evitem repetir el
+                    problema i ho gestionem tot sense que hagis de trucar a tres proveïdors diferents.</p>
+            </div>
+            <ul class="vals">
+                <li><span class="v-n">01</span>Resposta ràpida<span class="v-s">≤ 48h garantit</span></li>
+                <li><span class="v-n">02</span>Preu tancat<span class="v-s">Sense sorpreses</span></li>
+                <li><span class="v-n">03</span>Servei integral<span class="v-s">Hardware + Web</span></li>
+                <li><span class="v-n">04</span>Tracte directe<span class="v-s">Sempre la mateixa persona</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="proces">
+        <div class="proc-head reveal">
+            <div>
+                <div class="s-label">Com treballem</div>
+                <h2>Del problema<br>a la solució.</h2>
+            </div>
+            <p>Un procés clar i transparent. Sempre saps en quin punt estem i quan ho tindràs resolt.</p>
+        </div>
+        <div class="proc-steps">
+            <div class="p-s reveal">
+                <div class="p-s-n">01</div>
+                <h3>Contacte</h3>
+                <p>Truca'ns o omple el formulari. Et responem en menys de 4 hores en horari laboral.</p>
+            </div>
+            <div class="p-s reveal">
+                <div class="p-s-n">02</div>
+                <h3>Diagnosi</h3>
+                <p>Analitzem la incidència o el projecte i t'expliquem exactament el que hi ha.</p>
+            </div>
+            <div class="p-s reveal">
+                <div class="p-s-n">03</div>
+                <h3>Pressupost</h3>
+                <p>Pressupost detallat i tancat. Preu fix, sense costos ocults ni hores addicionals.</p>
+            </div>
+            <div class="p-s reveal">
+                <div class="p-s-n">04</div>
+                <h3>Execució</h3>
+                <p>Posem mans a l'obra i t'informem de l'evolució en cada pas clau del procés.</p>
+            </div>
+            <div class="p-s reveal">
+                <div class="p-s-n">05</div>
+                <h3>Lliurament</h3>
+                <p>Comprovem que tot funciona i t'oferim seguiment post-servei sense cost addicional.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EQUIPS -->
+    <section id="equips">
+        <div class="equips-head reveal">
+            <div>
+                <div class="s-label">Catàleg</div>
+                <h2>Equips que venem<br>i mantenim.</h2>
+            </div>
+            <p>Treballem amb les principals marques del mercat. T'assessorem sobre la millor solució per al teu cas i
+                pressupost, sense compromís.</p>
+        </div>
+        <div class="equips-grid">
+            <div class="eq reveal">
+                <div class="eq-cat">Portàtils</div>
+                <div class="eq-name">Ordinadors portàtils</div>
+                <p class="eq-desc">Des de gamma entrada fins a workstations professionals. Configurats i lliurats a punt
+                    per treballar des del primer dia.</p>
+            </div>
+            <div class="eq reveal">
+                <div class="eq-cat">Sobretaula</div>
+                <div class="eq-name">Equips de sobretaula</div>
+                <p class="eq-desc">Torres i all-in-one per a oficines. Configuració personalitzada per a cada lloc de
+                    treball i perfil d'usuari.</p>
+            </div>
+            <div class="eq reveal">
+                <div class="eq-cat">Servidors</div>
+                <div class="eq-name">Servidors i NAS</div>
+                <p class="eq-desc">Servidors locals i dispositius NAS per a còpies de seguretat, arxius compartits i
+                    serveis interns d'empresa.</p>
+            </div>
+            <div class="eq reveal">
+                <div class="eq-cat">Perifèrics</div>
+                <div class="eq-name">Monitors i perifèrics</div>
+                <p class="eq-desc">Monitors, teclats, ratolins i impressores per completar el lloc de treball amb les
+                    millors condicions d'ergonomia.</p>
+            </div>
+            <div class="eq reveal">
+                <div class="eq-cat">Xarxa</div>
+                <div class="eq-name">Xarxa i connectivitat</div>
+                <p class="eq-desc">Routers, switchos i punts d'accés wifi per a una xarxa d'empresa estable, segura i
+                    escalable.</p>
+            </div>
+            <div class="eq reveal">
+                <div class="eq-cat">Recanvis</div>
+                <div class="eq-name">Peces i components</div>
+                <p class="eq-desc">RAM, SSD, bateries i pantalles originals per a la reparació i ampliació dels teus
+                    equips actuals.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contacte">
+        <div class="ct-l reveal">
+            <div>
+                <div class="s-label" style="color:rgba(248,246,242,.4);">Contacte</div>
+                <h2>Parlem<br>ara<br><em>mateix.</em></h2>
+            </div>
+            <div class="ct-info">
+                <div class="ct-block">
+                    <div class="ct-lbl">Email</div>
+                    <div class="ct-val">hola@Techva.cat</div>
+                </div>
+                <div class="ct-block">
+                    <div class="ct-lbl">Telèfon</div>
+                    <div class="ct-val">+34 93 000 00 00</div>
+                </div>
+                <div class="ct-block">
+                    <div class="ct-lbl">Horari</div>
+                    <div class="ct-val">Dl–Dv · 09:00–18:00</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ct-r reveal">
+            <form id="cForm" onsubmit="send(event)">
+                <div class="f-row">
+                    <div><label class="f-lbl">Nom</label><input type="text" class="f-in" placeholder="Joan García"
+                            required></div>
+                    <div><label class="f-lbl">Empresa</label><input type="text" class="f-in"
+                            placeholder="La teva empresa"></div>
+                </div>
+                <label class="f-lbl">Correu electrònic</label>
+                <input type="email" class="f-in" placeholder="joan@empresa.com" required>
+                <label class="f-lbl">Servei d'interès</label>
+                <select class="f-in">
+                    <option value="">Selecciona un servei...</option>
+                    <option>Manteniment d'equips</option>
+                    <option>Compra / venda d'equips</option>
+                    <option>Creació de web</option>
+                    <option>Manteniment de web</option>
+                    <option>Altres</option>
+                </select>
+                <label class="f-lbl">Missatge</label>
+                <textarea class="f-in" placeholder="Explica'ns la teva situació..."></textarea>
+                <button type="submit" class="f-sub" id="fBtn">Enviar missatge →</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="f-logo">Tech<em>Nova</em></div>
+        <div class="f-copy">© 2025 TechNova · Andrés Casillas & Qilong Jin</div>
+        <div class="f-links">
+            <a href="#serveis">Serveis</a>
+            <a href="#nosaltres">Nosaltres</a>
+            <a href="#contacte">Contacte</a>
+        </div>
+    </footer>
+
+    <script>
+
+        /* Reveal */
+        const io = new IntersectionObserver(entries => {
+            entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 55); io.unobserve(e.target); } });
+        }, { threshold: .07 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+        /* Counters */
+        document.querySelectorAll('[data-count]').forEach(el => {
+            const n = +el.dataset.count, s = el.dataset.suffix || '';
+            const cio = new IntersectionObserver(([entry]) => {
+                if (!entry.isIntersecting) return; cio.disconnect();
+                let v = 0; const step = n / 50;
+                const t = setInterval(() => { v = Math.min(v + step, n); el.textContent = Math.round(v) + s; if (v >= n) clearInterval(t); }, 20);
+            }, { threshold: .5 });
+            cio.observe(el);
+        });
+
+        /* Nav border on scroll */
+        window.addEventListener('scroll', () => {
+            document.getElementById('nav').style.borderBottomColor = scrollY > 10 ? 'var(--rule)' : 'var(--rule)';
+        }, { passive: true });
+
+        /* Form */
+        function send(e) {
+            e.preventDefault();
+            const b = document.getElementById('fBtn');
+            b.textContent = 'Enviant…'; b.style.opacity = '.6';
+            setTimeout(() => { b.textContent = '✓ Rebut — t\'escrivim aviat'; b.style.opacity = '1'; e.target.reset(); }, 1100);
+        }
+    </script>
+</body>
+
+</html>
